@@ -1,0 +1,160 @@
+.button-navs{
+    position: absolute;
+    width: 100%;
+    height: 70vh;
+    justify-content: space-around;
+    
+  }
+  
+  /* sidenav peta style */
+  .sidenav{
+    top: 50%;
+    position: absolute;
+    z-index: 999;
+    align-content: space-around;
+    width: 40px;
+    height: 50px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 0 50px 50px 0;
+    padding: 1px;
+    font-size: 30px;
+    left: 0;
+  
+  }
+  /* sidenav peta style */
+  .sidenav-right{
+    top: 50%;
+    position: absolute;
+    z-index: 999;
+    align-content: space-around;
+    width: 45px;
+    height: 50px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 50px 0px 0px 50px;
+    padding: 1px;
+    font-size: 30px;
+    right: 0;
+    
+  
+  }
+  
+  .animateRoute:hover{
+    opacity: 1 !important;
+    z-index: 999 !important;
+    stroke-dasharray: 15;
+              animation: dash linear infinite;
+              animation-duration: 15.5833s;
+              z-index: 999;
+              opacity: 1;
+  }
+  
+  @keyframes dash {
+    to {
+        stroke-dashoffset: 1000;
+    }
+  }
+  
+  .offcanvas-header{
+    flex-direction: column;
+    color: white;
+  }
+  
+  /* map */
+  #map{
+    height: 100vh;
+    width: 100%;
+  }
+  
+  @media (max-width: 640px) {
+    #map {
+      height: 80vh;
+    }
+  }
+  
+  /* Leaflet style */
+  .leaflet-control-layers-list{
+    padding: 0;
+  }
+  .leaflet-control-layers-toggle{
+    width: 30px !important;
+    height: 33px !important;
+  }
+  
+  .leaflet-left{
+    display: flex;
+  }
+  
+  .leaflet-control{
+    height: 100%;
+  }
+  
+  .leaflet-routing-container-hide .leaflet-routing-collapse-btn{
+    left: 1px !important;
+    top: 0px !important;
+  }
+  .marker-cluster-small div{
+    /* background-color: none !important; */
+    background-image: url('../img/cctv.png');
+  }
+  
+  .leaflet-bottom{
+    display: flex;
+      justify-content: center;
+      align-items: end;
+  }
+
+  /*Legend specific*/
+.legend {
+    padding: 6px 8px;
+    font: 14px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.9);
+    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+    /*border-radius: 5px;*/
+    line-height: 24px;
+    color: #555;
+    margin-left: 45vw;
+    width: 250px;
+  }
+  .legend h4 {
+    text-align: center;
+    font-size: 16px;
+    margin: 2px 12px 8px;
+    color: #777;
+  }
+  
+  .legend span {
+    position: relative;
+    bottom: 3px;
+  }
+  
+  .legend i {
+    width: 40px;
+      height: 11px;
+      float: left;
+      padding: 5px;
+      margin: 0 5px 0 0;
+      opacity: 0.7;
+      text-align: center;
+  }
+  
+  .legend .param-start{
+    margin: -5px 8px 1px 0;
+      padding: 0px;
+      font-size: 13px;
+  
+  }
+  .legend .param-end{
+    margin: -5px 8px 1px 0;
+      padding: 0px;
+      font-size: 13px;
+  
+  }
+  
+  .legend i.icon {
+    background-size: 18px;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
