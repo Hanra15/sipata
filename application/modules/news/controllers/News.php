@@ -16,8 +16,8 @@ class News extends MY_Controller
 
         $page_content["css"] = "";
         $page_content["js"] = "";
-        $page_content["title"] = "Berita | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
-        $page_content["head"] = "Berita Lalu Lintas Kota Bogor";
+        $page_content["title"] = "Berita | SIPATA - Sistem Informasi Kabupaten Tanggerang";
+        $page_content["head"] = "Berita Pariwisata Kab. Tanggerang";
         $page_content["breadcrumb"] = "Berita";
         $page_content["page"] = "news/news_view";
 

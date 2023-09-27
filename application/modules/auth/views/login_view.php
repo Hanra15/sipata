@@ -39,7 +39,7 @@
 
 <body>
 
-  <main style="background-image: url('assets/img/background-login.png');">
+  <main style="background-image: url('assets/img/bg-tanggerang.png');">
     <div class="container-fluid">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">

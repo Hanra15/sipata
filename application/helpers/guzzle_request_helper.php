@@ -17,7 +17,7 @@ if (!function_exists('guzzle_request')) {
     {
         try {
             $client = new Client();
-            $request = $client->request($method, 'https://api.skripsijoss.my.id/' . $uri, $body);
+            $request = $client->request($method, 'https://api2.skripsijoss.my.id/' . $uri, $body);
             $response = $request->getBody()->getContents();
             $data = json_decode($response, true);
 

@@ -15,8 +15,8 @@ class Fasum extends MY_Controller
 
         $page_content["css"] = "";
         $page_content["js"] = "";
-        $page_content["title"] = "Fasilitas Umum | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
-        $page_content["head"] = "Fasilitas Umum Lalu Lintas Kota Bogor";
+        $page_content["title"] = "Fasilitas Wisata | SIPATA - Sistem Informasi Kabupaten Tanggerang";
+        $page_content["head"] = "Fasilitas Wisata Kab. Tanggerang";
         $page_content["breadcrumb"] = "Fasilitas";
         $page_content["page"] = "fasum/fasum_view";
 

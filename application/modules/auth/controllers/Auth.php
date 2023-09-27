@@ -17,7 +17,7 @@ class Auth extends MX_Controller
 		if (isset($this->session->userdata['logged'])) {
 			redirect('/dashboard');
 		} else {
-			$data["title"] = "LOGIN | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
+			$data["title"] = "LOGIN | SIPATA - Sistem Informasi Kabupaten Tanggerang";
 			$data["captcha"] = $this->recaptcha->getWidget();
 			$data["script_captcha"] = $this->recaptcha->getScriptTag();
 			$this->load->view('login_view', $data);

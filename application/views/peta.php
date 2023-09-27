@@ -105,26 +105,16 @@
         <div class="offcanvas-body">
             <form>
                 <div class="mb-3">
-                    <label for="min" class="form-label">Budget</label>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <input type="number" min="1000000" class="form-control" id="min">
-                        </div>
-                        <div class="col-md-2 align-self-center text-center">
-                            -
-                        </div>
-                        <div class="col-md-5">
-                            <input type="number" min="1000000" class="form-control" id="min">
-                        </div>
-
-                    </div>
+                    <label for="min" class="form-label">Perkiraan Biaya</label>
+                    <!-- <input type="text" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" class="form-control" id="currency-field"> -->
+                    <input type="number" min="500000" class="form-control" id="currency-field">
 
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Dengan Penginapan</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn btn-primary w-100">Cari wisata</button>
             </form>
         </div>
     </div>
@@ -134,6 +124,95 @@
 
 
     <script src="<?= base_url() ?>assets/js/kabTanggerangs.js"></script>
+
+    <script>
+        // Jquery Dependency
+
+        $("input[data-type='currency']").on({
+            keyup: function() {
+                formatCurrency($(this));
+            },
+            blur: function() {
+                formatCurrency($(this), "blur");
+            }
+        });
+
+
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+
+
+        function formatCurrency(input, blur) {
+            // appends $ to value, validates decimal side
+            // and puts cursor back in right position.
+
+            // get input value
+            var input_val = input.val();
+
+            // don't validate empty input
+            if (input_val === "") {
+                return;
+            }
+
+            // original length
+            var original_len = input_val.length;
+
+            // initial caret position 
+            var caret_pos = input.prop("selectionStart");
+
+            // check for decimal
+            if (input_val.indexOf(".") >= 0) {
+
+                // get position of first decimal
+                // this prevents multiple decimals from
+                // being entered
+                var decimal_pos = input_val.indexOf(".");
+
+                // split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                // add commas to left side of number
+                left_side = formatNumber(left_side);
+
+                // validate right side
+                right_side = formatNumber(right_side);
+
+                // On blur make sure 2 numbers after decimal
+                if (blur === "blur") {
+                    right_side += "00";
+                }
+
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
+
+                // join number by .
+                input_val = "Rp" + left_side + "." + right_side;
+
+            } else {
+                // no decimal entered
+                // add commas to number
+                // remove all non-digits
+                input_val = formatNumber(input_val);
+                input_val = "Rp" + input_val;
+
+                // final formatting
+                if (blur === "blur") {
+                    input_val += "";
+                }
+            }
+
+            // send updated string to input
+            input.val(input_val);
+
+            // put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+    </script>
 
 
     <script>
@@ -921,24 +1000,14 @@
             "Dark Base Map": DarkBaseMap,
             "Google Street": googleStreets,
             "Google Satelit": googleHybrid,
-            "Google Traffic": trafficMutantRoad,
             // "Google Transit": transitMutantRoad,
         };
 
         var overlays = {
 
             "Traffic Flow": traffic,
-            "All Trayek": routeTrayek,
-            "Trayek BisKita": routeTrayekBis,
-            "Trayek Angkot": routeTrayekAngkot,
-            "Stasiun": stasiun_bogor,
-            "Terminal": terminal_bogor,
-            "Rest Area": rest_bogor,
-            "Halte": halte_bogor,
-            "Polres": polres_bogor,
-            "Polsek": polsek_bogor,
-            "Pos": pos_bogor,
-            "CCTV": cctv_bogor,
+            "Wisata": terminal_bogor,
+            "Penginapan": stasiun_bogor,
 
         };
 

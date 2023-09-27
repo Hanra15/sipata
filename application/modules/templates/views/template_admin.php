@@ -166,32 +166,9 @@
             </li><!-- End berita Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>cctv">
-                    <i class="bi bi-webcam-fill"></i>
-                    <span>CCTV</span>
-                </a>
-            </li><!-- End User Page Nav -->
-
-            <li class="nav-heading">Pelayanan Publik</li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>polantas">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Polantas</span>
-                </a>
-            </li><!-- End Pos Page Nav -->
-
-            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>fasum">
                     <i class="bi bi-building"></i>
-                    <span>Fasilitas Umum</span>
-                </a>
-            </li><!-- End Pos Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>trayek">
-                    <i class="fa-solid fa-route"></i>
-                    <span>Trayek</span>
+                    <span>Fasilitas Wisata</span>
                 </a>
             </li><!-- End Pos Page Nav -->
 
@@ -204,7 +181,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            <strong><span>SIJAB</span></strong> - Sistem Informasi Jalan Raya Kota Bogor
+            <strong><span>SIPATA</span></strong> - Sistem Informasi Wisata Kabupaten Tanggerang
         </div>
 
     </footer><!-- End Footer -->
