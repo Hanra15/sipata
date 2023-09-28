@@ -18,12 +18,21 @@ class Pelayanan extends MX_Controller
         $data['breadcrumb'] = "Peta";
         $data['page'] = "peta";
 
-        $getTrayek = guzzle_request('GET', 'open/trayek', []);
-        $data['get_trayek'] = $getTrayek['data'];
+        $datapost = $this->input->post();
 
-        // echo '<pre>';
-        // var_dump($data['get_trayek']);
-        // die;
+        if (isset($datapost['cari'])) {
+            $data['cari'] = '1';
+            $data['latitude'] = $datapost['latitude'];
+            $data['longitude'] = $datapost['longitude'];
+            $data['budget'] = $datapost['budget'];
+
+            $data['datalist'] = guzzle_request('GET', 'open/sloc?latitude=' . $data['latitude'] . '&longitude=' . $data['longitude'] . '&budget=' . $data['budget'] . '', []);
+        } else {
+            $data['cari'] = '0';
+            $data['latitude'] = '';
+            $data['longitude'] = '';
+            $data['budget'] = '';
+        }
 
         $this->load->view('peta', $data);
     }

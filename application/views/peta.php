@@ -102,25 +102,47 @@
             <h5 class="offcanvas-title fs-6" id="offcanvasScrollingLabel">Sistem Informasi Pariwisata Tanggerang</h5>
             <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
         </div>
-        <div class="offcanvas-body">
-            <form action="" class="" id="">
+        <div class="offcanvas-body d-flex flex-column">
+            <form method="post" action="" role="form" class="mb-auto" id="">
+                <input type="hidden" name="latitude" value="-6.245083800000000">
+                <input type="hidden" name="longitude" value="106.526259400000000">
                 <div class="mb-3">
                     <label for="min" class="form-label">Perkiraan Biaya</label>
                     <!-- <input type="text" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" class="form-control" id="currency-field"> -->
-                    <input type="number" min="500000" class="form-control" id="currency-field">
+                    <input type="number" min="100000" class="form-control" id="currency-field" name="budget">
 
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="include_accommodation">
                     <label class="form-check-label" for="exampleCheck1">Dengan Penginapan</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Cari wisata</button>
+                <button type="submit" name="cari" class="btn btn-primary w-100">Cari wisata</button>
             </form>
             <hr>
-
-            <ul>
-                <li>test</li>
-            </ul>
+            <?php if ($cari == 1) : ?>
+                <h4>Rekomendasi Wisata</h4>
+                <hr>
+                <ul class="list-group">
+                    <?php
+                    $i = 0;
+                    foreach ($datalist as $rekomen) :
+                    ?>
+                        <li class="list-group-item mb-2">
+                            <h5 class="fw-bold"><?= $rekomen['name_fasum'] ?></h5>
+                            <h6>Rating : <?= $rekomen['rating'] ?></h6>
+                            <h6>Tiket Masuk : Rp <?= number_format(floatval($rekomen['price']), 0, ",", "."); ?></h6>
+                            <a href="<?= base_url('pelayanan/peta?') . 'lat=' . $rekomen['latitude'] . '&long=' . $rekomen['longitude'] ?>" class="btn btn-primary text-white w-100">Lihat di Peta</a>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+                <hr>
+            <?php endif ?>
+            <form action="" id="" class="">
+                <input type="hidden" name="" value="">
+                <button type="submit" class="btn btn-secondary w-100">
+                    Reset
+                </button>
+            </form>
         </div>
     </div>
 
@@ -273,50 +295,13 @@
             "opacity": 0.65
         }
 
-        var icon_cctv = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/cctv.png',
-            iconSize: [25, 25],
-            iconAnchor: [5, 10]
-        })
-
-        var icon_polsek = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/polsek.png',
-            iconSize: [45, 45],
-            iconAnchor: [23, 25]
-        })
-
-        var icon_polres = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/polres.png',
-            iconSize: [45, 45],
-            iconAnchor: [23, 25]
-        })
-
-        var icon_pos = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/pos.png',
+        var icon_wisata = L.icon({
+            iconUrl: '<?= base_url() ?>assets/img/icon-wisata.png',
             iconSize: [35, 35],
             iconAnchor: [23, 25]
         })
-
-        var icon_stasiun = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/stasiun.png',
-            iconSize: [35, 35],
-            iconAnchor: [23, 25]
-        })
-
-        var icon_terminal = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/terminal.png',
-            iconSize: [35, 35],
-            iconAnchor: [23, 25]
-        })
-
-        var icon_rest = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/rest.png',
-            iconSize: [35, 35],
-            iconAnchor: [23, 25]
-        })
-
-        var icon_halte = L.icon({
-            iconUrl: '<?= base_url() ?>assets/img/halte.png',
+        var icon_penginapan = L.icon({
+            iconUrl: '<?= base_url() ?>assets/img/icon-penginapan.png',
             iconSize: [35, 35],
             iconAnchor: [23, 25]
         })
@@ -326,8 +311,6 @@
         var tanggerangKab = L.geoJSON(tanggerangKab, {
             style: kabColor
         }).addTo(map)
-
-
 
         var traffic = MQ.trafficLayer({
             layers: ['flow']
@@ -364,16 +347,6 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
         // googleHybrid.addTo(map)
-
-        var trafficMutantRoad = L.gridLayer.googleMutant({
-            maxZoom: 24,
-            type: "roadmap",
-        }).addGoogleLayer("TrafficLayer");
-
-        var transitMutantRoad = L.gridLayer.googleMutant({
-            maxZoom: 24,
-            type: "roadmap",
-        }).addGoogleLayer("TransitLayer");
 
         // control layer
         L.control.zoom({
@@ -422,29 +395,29 @@
 
         }).addTo(map)
 
-        var stasiun_bogor = L.markerClusterGroup({
+        var wisata_cluster = L.markerClusterGroup({
             iconCreateFunction: function(cluster) {
                 return new L.DivIcon({
                     html: `
-                <div style="width: 35px; height: 35px; border-radius: 50%; background-color:#007bb5;text-align: center;margin-top: -1px;margin-left: -1px;">
-                <b style="top: 8px;position: relative; font-size: 12px; color:#ffffff;"><i class="bi bi-bus-front"></i> ${cluster.getChildCount()}</b>
+                <div style="width: 35px; height: 35px; border-radius: 50%; background-color:#5BD779;text-align: center;margin-top: -1px;margin-left: -1px;">
+                <b style="top: 8px;position: relative; font-size: 12px; color:#000;"><i class="bi bi-tree-fill"></i> ${cluster.getChildCount()}</b>
                 </div>`
                 });
             }
         });
-        var terminal_bogor = L.markerClusterGroup({
+        var penginapan_cluster = L.markerClusterGroup({
             iconCreateFunction: function(cluster) {
                 return new L.DivIcon({
                     html: `
-                <div style="width: 35px; height: 35px; border-radius: 50%; background-color:#5bd779;text-align: center;margin-top: -1px;margin-left: -1px;">
-                <b style="top: 8px;position: relative; font-size: 12px; color:#000;"><i class="bi bi-bus-front-fill"></i> ${cluster.getChildCount()}</b>
+                <div style="width: 35px; height: 35px; border-radius: 50%; background-color:#007BB5;text-align: center;margin-top: -1px;margin-left: -1px;">
+                <b style="top: 8px;position: relative; font-size: 12px; color:#fff;"><i class="bi bi-buildings-fill"></i> ${cluster.getChildCount()}</b>
                 </div>`
                 });
             }
         });
 
-        var stasiun = [];
-        var terminal = [];
+        var wisata = [];
+        var penginapan = [];
 
         // Wisata
         $(document).ready(function() {
@@ -456,8 +429,8 @@
                     let ressData = result;
                     // console.log(ressData);
                     for (let i = 0; i < ressData.length; i++) {
-                        // stasiun
-                        if (ressData[i].category_fasum.id == 2) {
+                        // wisata
+                        if (ressData[i].category_fasum.id == 1) {
                             var id = ressData[i].id
                             var name = ressData[i].name_fasum
                             var latitude = ressData[i].latitude
@@ -468,8 +441,8 @@
                             var close = ressData[i].close_time
                             var image = ressData[i].image_fasum
 
-                            stasiun[i] = L.marker([latitude, longitude], {
-                                icon: icon_stasiun,
+                            wisata[i] = L.marker([latitude, longitude], {
+                                icon: icon_wisata,
                             }).bindPopup(`
                         <div class="" style="width: 300px">
                             <h5 class="text-center mt-3">${name}</h5>
@@ -496,10 +469,10 @@
                         </div>
                         `);
 
-                            stasiun_bogor.addLayer(stasiun[i]);
+                            wisata_cluster.addLayer(wisata[i]).addTo(map);
                             // console.log(ressData[i]);
-                            // terminal 
-                        } else if (ressData[i].category_fasum.id == 1) {
+                            // penginapan 
+                        } else if (ressData[i].category_fasum.id == 2) {
                             var name = ressData[i].name_fasum
                             var latitude = ressData[i].latitude
                             var longitude = ressData[i].longitude
@@ -509,8 +482,8 @@
                             var close = ressData[i].close_time
                             var image = ressData[i].image_fasum
 
-                            terminal[i] = L.marker([latitude, longitude], {
-                                icon: icon_terminal,
+                            penginapan[i] = L.marker([latitude, longitude], {
+                                icon: icon_penginapan,
                             }).bindPopup(`
                         <div class="" style="width: 300px">
                             <h5 class="text-center mt-3">${name}</h5>
@@ -537,7 +510,7 @@
                             </div>
                         </div>
                         `);
-                            terminal_bogor.addLayer(terminal[i]);
+                            penginapan_cluster.addLayer(penginapan[i]);
                         }
 
                     }
@@ -557,8 +530,8 @@
         var overlays = {
 
             "Traffic Flow": traffic,
-            "Wisata": terminal_bogor,
-            "Penginapan": stasiun_bogor,
+            "Wisata": wisata_cluster,
+            "Penginapan": penginapan_cluster,
 
         };
 
@@ -568,9 +541,6 @@
             collapsed: true
 
         }).addTo(map);
-
-
-
 
         // custom heading layer
         $(".leaflet-control-layers-base").prepend("<hr class='my-1'>");
