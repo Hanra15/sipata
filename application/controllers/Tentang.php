@@ -16,6 +16,7 @@ class Tentang extends MX_Controller
         $data['title'] = "Tentang Aplikasi | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
         $data['heading'] = "Tentang SIJAB";
         $data['breadcrumb'] = "Tentang";
+        $data['page'] = "tentang";
 
         $getCount = guzzle_request('GET', 'open/count_pelayanan', []);
         $data['get_count'] = $getCount['data'];

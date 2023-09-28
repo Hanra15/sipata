@@ -13,9 +13,10 @@ class Pelayanan extends MX_Controller
 
     public function peta()
     {
-        $data['title'] = "Peta Lalu Lintas | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
-        $data['heading'] = "Peta Lalu Lintas Kota Bogor";
+        $data['title'] = "Peta Wisata | SIPATA - Sistem Informasi Kabupaten Tanggerang";
+        $data['heading'] = "Peta Wisata Kab. Tanggerang";
         $data['breadcrumb'] = "Peta";
+        $data['page'] = "peta";
 
         $getTrayek = guzzle_request('GET', 'open/trayek', []);
         $data['get_trayek'] = $getTrayek['data'];
@@ -27,11 +28,44 @@ class Pelayanan extends MX_Controller
         $this->load->view('peta', $data);
     }
 
+    public function pariwisata()
+    {
+        $data['title'] = "Destinasi Wisata | SIPATA - Sistem Informasi Kabupaten Tanggerang";
+        $data['heading'] = "Destinasi Wisata Kab. Tanggerang";
+        $data['breadcrumb'] = "Pariwisata";
+        $data['page'] = "pariwisata";
+
+        $getFasum = guzzle_request('GET', 'open/fasum', []);
+        $data['getFasum'] = $getFasum['data'];
+
+        $this->template->load('templates/template', 'pariwisata', $data);
+    }
+
+    public function detail($id)
+    {
+        $data['title'] = "Detail Fasum | SIPATA - Sistem Informasi Kabupaten Tanggerang";
+        $data['heading'] = "Destinasi Wisata Kab. Tanggerang";
+        $data['breadcrumb'] = "Detail";
+        $data['page'] = "pariwisata";
+
+        $getFasum = guzzle_request('GET', 'open/fasum', []);
+        $data['getFasum'] = $getFasum['data'];
+
+        $detail = guzzle_request('GET', 'open/fasum/' . $id, []);
+        $data['detail'] = $detail['data'];
+
+        // var_dump($data['all_berita']);
+        // die;
+
+        $this->template->load('templates/template', 'detail-fasum', $data);
+    }
+
     public function cctv()
     {
         $data['title'] = "CCTV | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
         $data['heading'] = "CCTV Lalu Lintas Kota Bogor";
         $data['breadcrumb'] = "CCTV";
+        $data['page'] = "cctv";
 
         $getCCTV = guzzle_request('GET', 'open/cctv', []);
         $data['getCCTV'] = $getCCTV['data'];

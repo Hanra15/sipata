@@ -16,6 +16,7 @@ class Berita extends MX_Controller
         $data['title'] = "Berita | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
         $data['heading'] = "Berita Terkini";
         $data['breadcrumb'] = "Berita";
+        $data['page'] = "berita";
 
         $getNews = guzzle_request('GET', 'open/newspagenation', []);
         $data['get_berita'] = $getNews['data'];
@@ -31,6 +32,7 @@ class Berita extends MX_Controller
         $data['title'] = "Berita | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
         $data['heading'] = "Berita Terkini";
         $data['breadcrumb'] = "Detail";
+        $data['page'] = "berita";
 
         $getNews = guzzle_request('GET', 'open/news/' . $id, []);
         $data['detail_berita'] = $getNews['data'][0];

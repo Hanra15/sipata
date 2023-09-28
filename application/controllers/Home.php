@@ -17,6 +17,7 @@ class Home extends MX_Controller
         // $token = $this->session->userdata['token'];
 
         $data['title'] = "Beranda | SIJAB - Sistem Informasi Jalan Raya Kota Bogor";
+        $data['page'] = "beranda";
 
         $getNews = guzzle_request('GET', 'open/newspagenation', []);
         $data['get_berita'] = $getNews['data'];

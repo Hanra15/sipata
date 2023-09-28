@@ -94,13 +94,13 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto me-lg-0"><img src="<?= base_url() ?>assets/img/logo/logo-brand.png" alt="" class="img-fluid"></a>
-      <h1 class="logo me-auto"><a href="index.html"><span>SI</span>PATA</a></h1>
+      <a href="<?= base_url() ?>" class="logo me-auto me-lg-0"><img src="<?= base_url() ?>assets/img/logo/logo-brand.png" alt="" class="img-fluid"></a>
+      <h1 class="logo me-auto"><a href="<?= base_url() ?>"><span>SI</span>PATA</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a href="index.html" class="active">Beranda</a></li>
+          <li><a href="<?= base_url() ?>" class="<?= $page === 'beranda' ? 'active' : '' ?>">Beranda</a></li>
 
           <!-- <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -119,9 +119,10 @@
             </ul>
           </li> -->
 
-          <li><a href="<?= base_url() ?>pelayanan/peta">Pariwisata</a></li>
-          <li><a href="portfolio.html">Tentang</a></li>
-          <li><a href="contact.html">Kontak</a></li>
+          <li><a href="<?= base_url() ?>pelayanan/peta" class="<?= $page === 'peta' ? 'active' : '' ?>">Peta</a></li>
+          <li><a href="<?= base_url() ?>pelayanan/pariwisata" <?= $page === 'pariwisata' ? 'active' : '' ?>>Pariwisata</a></li>
+          <li><a href="<?= base_url() ?>berita" <?= $page === 'berita' ? 'active' : '' ?>>Berita</a></li>
+          <li><a href="<?= base_url() ?>tentang" <?= $page === 'tentang' ? 'active' : '' ?>>Tentang</a></li>
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -163,10 +164,11 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Link</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Beranda</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Pariwisata</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Tentang</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Kontak</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?= base_url() ?>">Beranda</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?= base_url() ?>pelayanan/peta">Peta</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?= base_url() ?>pelayanan/pariwisata">Pariwisata</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?= base_url() ?>berita">Berita</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?= base_url() ?>tentang">Tentang</a></li>
 
             </ul>
           </div>

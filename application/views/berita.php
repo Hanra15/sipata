@@ -1,65 +1,71 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/background-hero.png');">
-            <div class="container position-relative">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <h2><?= $heading ?></h2>
-                        <p>Berita seputar lalu lintas di Kota Bogor</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <div class="container">
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><?= $heading ?></h2>
                 <ol>
                     <li><a href="<?= base_url() ?>">Beranda</a></li>
                     <li><?= $breadcrumb ?></li>
                 </ol>
             </div>
-        </nav>
-    </div><!-- End Breadcrumbs -->
-
-    <!-- ======= Horizontal Pricing Section ======= -->
-    <section id="horizontal-pricing" class="horizontal-pricing pt-0">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <!-- <span>Horizontal Pricing</span>
-                <h2>Horizontal Pricing</h2> -->
-            </div>
-
-            <?php
-            $i = 0;
-            foreach ($get_berita as $berita) :
-                // var_dump($berita);
-                // die;
-                if (++$i == 6) break;
-            ?>
-
-                <div class="row gy-4 pricing-item mt-3 mb-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-3 d-flex align-items-center justify-content-center">
-                        <img src="<?= url_api() . $berita['news_image'] ?>" alt="" class="w-100 img-fluid">
-                    </div>
-                    <div class="col-lg-6 align-self-start">
-                        <h4 class="fs-4"><?= $berita['title'] ?></h4>
-                        <h6 class="text-secondary mb-3"><?= format_indoHari($berita['date_news']) ?></h6>
-                        <p><?= substr($berita['content'], 0, 300) . '. . .' ?></p>
-                    </div>
-
-                    <div class="col-lg-3 d-flex align-items-center justify-content-center">
-                        <div class="text-center"><a href="<?= base_url('berita/detail/' . $berita['id']) ?>" class="buy-btn">Baca Selengkapnya</a></div>
-                    </div>
-                </div>
-                <!-- End Pricing Item -->
-
-            <?php
-            endforeach
-            ?>
 
         </div>
-    </section><!-- End Horizontal Pricing Section -->
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+
+                <?php
+                $i = 0;
+                foreach ($get_berita as $berita) :
+                    // var_dump($berita);
+                    // die;
+                    // if (++$i == 6) break;
+                ?>
+                    <div class="col-lg-6 entries">
+                        <article class="entry">
+
+                            <div class="entry-img">
+                                <img src="<?= url_api() . $berita['news_image'] ?>" alt="" class="img-fluid w-100">
+                            </div>
+
+                            <h2 class="entry-title">
+                                <a href="blog-single.html"><?= $berita['title'] ?></a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01"><?= format_indoHari($berita['date_news']) ?></time></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+                                <p>
+                                    <?= substr($berita['content'], 0, 300) . '. . .' ?>
+                                </p>
+                                <div class="read-more">
+                                    <a href="<?= base_url('berita/detail/' . $berita['id']) ?>">Read More</a>
+                                </div>
+                            </div>
+
+                        </article><!-- End blog entry -->
+
+                    </div><!-- End blog entries list -->
+                <?php endforeach ?>
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End Blog Section -->
+
+
 
 </main><!-- End #main -->

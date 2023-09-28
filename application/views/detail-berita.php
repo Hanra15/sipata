@@ -1,78 +1,90 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-        <div class="page-header d-flex align-items-center" style="background-image: url('../../assets/img/background-hero.png');padding-bottom: 10px;padding-top: 90px;">
-            <div class="container position-relative">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <h2><?= $heading ?></h2>
-                        <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <div class="container">
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><?= $heading ?></h2>
                 <ol>
                     <li><a href="<?= base_url() ?>">Beranda</a></li>
-                    <li><a href="<?= base_url() ?>berita">Berita</a></li>
                     <li><?= $breadcrumb ?></li>
                 </ol>
             </div>
-        </nav>
-    </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Service Details Section ======= -->
-    <section id="service-details" class="service-details">
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
 
-            <div class="row gy-4">
-                <div class="col-lg-8">
-                    <img src="<?= url_api() . $detail_berita['news_image'] ?>" alt="" class="img-fluid services-img" width="100%">
+            <div class="row">
 
-                    <h3 style="text-align:justify;"><?= $detail_berita['title'] ?></h3>
-                    <h6 class="text-secondary mb-3"><?= format_indoHari($detail_berita['date_news']) ?></h6>
-                    <textarea name="" id="" rows="15" style="width: 100%; border:none; text-align:justify; background-color:white; color:black" disabled>
-                    <?= $detail_berita['content'] ?>
-                    </textarea>
-                    <!-- <p style="text-align:justify;">
-                        <?= $detail_berita['content'] ?>
-                    </p> -->
+                <div class="col-lg-8 entries">
 
-                </div>
+                    <article class="entry entry-single">
+
+                        <div class="entry-img">
+                            <img src="<?= url_api() . $detail_berita['news_image'] ?>" alt="" class="img-fluid w-100">
+                        </div>
+
+                        <h2 class="entry-title">
+                            <a href="#"><?= $detail_berita['title'] ?></a>
+                        </h2>
+
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01"><?= format_indoHari($detail_berita['date_news']) ?></time></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="entry-content">
+                            <textarea name="" id="" rows="25" style="width: 100%; border:none; text-align:justify; background-color:white; color:black" disabled>
+                                <?= $detail_berita['content'] ?>
+                            </textarea>
+                        </div>
+
+                        <div class="entry-footer">
+                            <i class="bi bi-folder"></i>
+                            <ul class="cats">
+                                <li><a href="#">Pariwisata</a></li>
+                            </ul>
+                        </div>
+
+                    </article><!-- End blog entry -->
+
+                </div><!-- End blog entries list -->
 
                 <div class="col-lg-4">
-                    <h4>Berita Lainnya</h4>
-                    <div class="services-list">
 
-                        <?php
-                        $i = 0;
-                        foreach ($all_berita as $berita) :
-                            // var_dump($berita);
-                            // die;
-                            if (++$i == 6) break;
-                        ?>
-                            <a href="<?= base_url('berita/detail/' . $berita['id']) ?>">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="<?= url_api() . $berita['news_image'] ?>" alt="berita" class="img-fluid">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h6><?= $berita['title'] ?></h6>
-                                    </div>
+                    <div class="sidebar">
+
+                        <h3 class="sidebar-title">Recent Posts</h3>
+                        <div class="sidebar-item recent-posts">
+                            <?php
+                            $i = 0;
+                            foreach ($all_berita as $berita) :
+                                // var_dump($berita);
+                                // die;
+                                if (++$i == 6) break;
+                            ?>
+                                <div class="post-item clearfix">
+                                    <img src="<?= url_api() . $berita['news_image'] ?>" alt="">
+                                    <h4><a href="<?= base_url('berita/detail/' . $berita['id']) ?>"><?= $berita['title'] ?></a></h4>
+                                    <time datetime="2020-01-01"><?= format_indoHari($berita['date_news']) ?></time>
                                 </div>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
+                            <?php endforeach; ?>
 
+                        </div><!-- End sidebar recent posts-->
 
+                    </div><!-- End sidebar -->
 
-                </div>
+                </div><!-- End blog sidebar -->
 
             </div>
 
         </div>
-    </section><!-- End Service Details Section -->
+    </section><!-- End Blog Single Section -->
 
 </main><!-- End #main -->

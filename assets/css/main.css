@@ -151,6 +151,11 @@ h6 {
     align-items: end;
 }
 
+.leaflet-routing-container{
+  width: 650px !important;
+  padding-left: 350px !important;
+}
+
 /* .leaflet-interactive {
   stroke-dasharray: 7;
     animation: dash 15s linear;
